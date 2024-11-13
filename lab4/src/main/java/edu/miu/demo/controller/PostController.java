@@ -26,12 +26,27 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
-//    @ResponseStatus(HttpStatus.OK)
-//    @GetMapping
-//    public List<PostDto> getAll() {
-//        return postService.findAll();
-//    }
-//
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping()
+    public ResponseEntity<List<PostDto>> getAll() {
+        List<PostDto> posts = postService.findAll();
+        return ResponseEntity.ok(posts);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping()
+    public void save(@RequestBody PostDto post) {
+        postService.save(post);
+    }
+
+
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable long id) {
+        postService.delete(id);
+    }
+
+    //
 //    @GetMapping("/id/{id}")
 //    public ResponseEntity<PostDto> getById(@PathVariable long id) {
 //        var post = postService.getById(id);

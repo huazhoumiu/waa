@@ -18,15 +18,32 @@ import java.util.stream.Collectors;
 public class PostServiceImpl implements PostService {
 
     private final PostRepo postRepo;
+    private final ListMapper listMapper;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public PostServiceImpl(PostRepo postRepo) {
+    public PostServiceImpl(PostRepo postRepo, ListMapper listMapper, ModelMapper modelMapper) {
         this.postRepo = postRepo;
+        this.listMapper = listMapper;
+        this.modelMapper = modelMapper;
     }
 
     public List<Post> findPostByTitle(String title) {
         return postRepo.findPostsByTitle(title);
     }
+
+    public List<PostDto> findAll() {
+        return (List<PostDto>) listMapper.mapList(postRepo.findAll(), new PostDto());
+    }
+
+    public void save(PostDto p) {
+        postRepo.save(modelMapper.map(p, Post.class));
+    }
+
+    public void delete(long id) {
+        postRepo.deleteById(id);
+    }
+
 //
 //    @Autowired
 //    ModelMapper modelMapper;
@@ -51,9 +68,7 @@ public class PostServiceImpl implements PostService {
 //        postRepo.save(modelMapper.map(p, Post.class));
 //    }
 //
-//    public void delete(long id) {
-//        postRepo.delete(id);
-//    }
+
 //
 //    public void update(long id, PostDto post) {
 //        postRepo.update(id, modelMapper.map(post, Post.class));
