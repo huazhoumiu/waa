@@ -2,7 +2,7 @@ import React from 'react'
 
 const Post = (props) => {
   return (
-    <div className="Content">
+    <div className="Content" onClick={props.setSelected}>
         {/* <div>{post.id}</div> */}
         <h3>{props.title}</h3>
         <div className='Field'>

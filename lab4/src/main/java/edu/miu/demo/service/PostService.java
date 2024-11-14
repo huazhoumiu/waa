@@ -1,5 +1,6 @@
 package edu.miu.demo.service;
 
+import edu.miu.demo.entity.Comment;
 import edu.miu.demo.entity.Post;
 import edu.miu.demo.entity.dto.PostDto;
 
@@ -14,4 +15,6 @@ public interface PostService {
     void save(PostDto post);
     void delete(long id);
     List<Post> findPostByTitle(String title);
+    List<Comment> findCommentByPostId(long postId);
+    Post findById(long id);
 }

@@ -16,6 +16,7 @@ public interface PostRepo extends JpaRepository<Post, Long> {
 //    public List<Post> getBySubName(String name);
 
     public List<Post> findAll();
+    public Post findById(long id);
     public Post save(Post post);
     public void deleteById(long id);
     @Query("SELECT p FROM Post p WHERE p.title = :title")

@@ -1,5 +1,6 @@
 package edu.miu.demo.service.impl;
 
+import edu.miu.demo.entity.Comment;
 import edu.miu.demo.entity.Post;
 import edu.miu.demo.entity.dto.PostDto;
 import edu.miu.demo.helper.ListMapper;
@@ -42,6 +43,14 @@ public class PostServiceImpl implements PostService {
 
     public void delete(long id) {
         postRepo.deleteById(id);
+    }
+
+    public List<Comment> findCommentByPostId(long id) {
+        return postRepo.findById(id).getComments();
+    }
+
+    public Post findById(long id) {
+        return postRepo.findById(id);
     }
 
 //

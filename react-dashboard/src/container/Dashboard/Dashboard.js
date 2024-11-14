@@ -3,6 +3,7 @@ import Posts from '../Posts/Posts'
 import { fetchService } from '../../services/fetchServices';
 import NewPostHook from '../../components/NewPost/NewPostHook';
 import axios from 'axios';
+import PostDetails from '../../components/PostDetails/PostDetails';
 // import { response } from 'express';
 
 
@@ -15,7 +16,7 @@ const Dashboard = () => {
 
     const [title, setTitle] = useState('');
 
-    const [selectedState, setSelectedState] = useState(0);
+    const [selectedState, setSelectedState] = useState(-1);
 
     const setSelected = (id) => {
       setSelectedState(id);
@@ -71,6 +72,11 @@ const Dashboard = () => {
             posts = {posts}
             setSelected = {setSelected}
             deletePost= {deleteButtonClicked}
+          />
+        </div>
+        <div>
+          <PostDetails 
+            id = {selectedState}
           />
         </div>
         <input type='text' value={title} onChange={(e)=> setTitle(e.target.value)} placeholder='Enter new title' style={{marginLeft:'30px'}}/>

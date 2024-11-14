@@ -1,5 +1,6 @@
 package edu.miu.demo.controller;
 
+import edu.miu.demo.entity.Comment;
 import edu.miu.demo.entity.Post;
 import edu.miu.demo.entity.dto.PostDto;
 import edu.miu.demo.service.PostService;
@@ -20,11 +21,11 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("/{title}")
-    public ResponseEntity<List<Post>> getPost(@PathVariable String title) {
-        List<Post> posts = postService.findPostByTitle(title);
-        return ResponseEntity.ok(posts);
-    }
+//    @GetMapping("/{title}")
+//    public ResponseEntity<List<Post>> getPost(@PathVariable String title) {
+//        List<Post> posts = postService.findPostByTitle(title);
+//        return ResponseEntity.ok(posts);
+//    }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping()
@@ -45,6 +46,19 @@ public class PostController {
     public void delete(@PathVariable long id) {
         postService.delete(id);
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}/comments")
+    public List<Comment> getComments(@PathVariable long id) {
+        return postService.findCommentByPostId(id);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Post> getById(@PathVariable long id) {
+        var post = postService.findById(id);
+        return ResponseEntity.ok(post);
+    }
+
 
     //
 //    @GetMapping("/id/{id}")
